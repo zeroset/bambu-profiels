@@ -21,7 +21,7 @@ preset is shipped at all, which is why the ASA+ numbers come from the H2D pack i
 
 | Preset | Inherits | Material numbers |
 |---|---|---|
-| `filament/eSUN PLA+ @BBL X2D 0.4 nozzle` | `filament/base/eSUN PLA+ @BBL X2D @base` | 220 °C, MVS 16, flow 0.98, 22.99 €/kg, 1.25 g/cm³, textured plate 60 °C |
+| `filament/eSUN PLA+ @BBL X2D 0.4 nozzle` | `filament/base/eSUN PLA+ @BBL X2D @base` | 220 °C, MVS 20/38/20/20/29/20, flow 0.98, 22.99 €/kg, 1.25 g/cm³, textured plate 60 °C |
 | `filament/eSUN ASA+ @BBL X2D 0.4 nozzle` | `filament/base/eSUN ASA+ @BBL X2D @base` | 260 °C, MVS 16, flow 0.96, 24.99 €/kg, 1.04 g/cm³, chamber 50 °C, fan max 40 % |
 | `process/eSUN PLA+ Process @BBL X2D` | `process/base/eSUN PLA+ Process @base` | walls 280/200, infill 280, top 250, first layer 50 |
 | `process/eSUN ASA+ Process @BBL X2D` | `process/base/eSUN ASA+ Process @base` | walls 200/150, infill 150–200 |
@@ -48,9 +48,24 @@ load time ("Preset already present, not loading").
   loader maps per-variant values by name, so the two E3D High Flow variants keep the values of
   the X2D parent preset they inherit from.
 
-## Numbers worth double-checking
+## Volumetric speed
 
-eSUN's own published values disagree across sources: the Bambu-shipped `eSUN PLA+ @base` says
-MVS 16, cost 22.99, density 1.25; third-party X2D profiles claim MVS 21, cost 24.99, density
-1.26. The Bambu-shipped values are used here. If PLA+ flow-starves at 16 mm³/s, raise
-`filament_max_volumetric_speed` in `filament/base/eSUN PLA+ @BBL X2D @base.json`.
+eSUN publishes a flat 16 mm³/s; third-party X2D profiles derived from their packs claim 21.
+This repo uses **20 mm³/s for Direct Drive Standard** (matching the `Generic PLA Fast` preset)
+and scales the other extruder variants after Bambu's own X2D ratios (`21 / 40 / 21 / 21 / 30 / 21`):
+
+| Variant | MVS | Basis |
+|---|---:|---|
+| Direct Drive Standard | 20 | chosen |
+| Direct Drive High Flow | 38 | Bambu 40/21 × 20 |
+| Direct Drive E3D High Flow | 20 | Bambu leaves E3D at the standard value |
+| Bowden Standard | 20 | Bambu keeps Bowden at parity with Direct (21/21) |
+| Bowden High Flow | 29 | Bambu 30/21 × 20 |
+| Bowden E3D High Flow | 20 | Bambu leaves E3D at the standard value |
+
+The X2D is a two-extruder machine (`extruder_type: Direct Drive, Bowden`), so slots 4–6 are the
+second, Bowden-fed extruder, not an alternative nozzle on extruder 1.
+
+At 0.2 mm layers those limits work out to ~227 mm/s on 0.45 mm walls/infill and ~243 mm/s on
+0.42 mm lines before the slicer throttles. The cost/density values remain Bambu's shipped eSUN
+numbers (22.99 / 1.25) rather than the third-party 24.99 / 1.26.
