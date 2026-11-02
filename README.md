@@ -9,11 +9,11 @@ as diffs.
 ## Layout
 
 ```
-filament/        filament presets; base/ holds hidden bases
-process/         process presets;  base/ holds hidden bases
-machine/         printer presets;  base/ holds hidden bases
+filament/        filament presets
+process/         process presets
+machine/         printer presets
 vendor/esun/     provenance of the eSUN numbers
-tools/           check-presets.sh
+tools/           check-presets.sh, link-cloud-info.py
 AGENTS.md        contribution/privacy rules — read before committing
 ```
 
@@ -24,9 +24,11 @@ AGENTS.md        contribution/privacy rules — read before committing
 | eSUN PLA+ | `eSUN PLA+ @BBL X2D 0.4 nozzle` | `eSUN PLA+ Process @BBL X2D` |
 | eSUN ASA+ | `eSUN ASA+ @BBL X2D 0.4 nozzle` | `eSUN ASA+ Process @BBL X2D` |
 
-Each visible preset is a thin layer over a hidden `@base` file in `base/`, so vendor numbers
-stay untouched and your own tweaks remain a small diff. `base/` is the only subfolder Bambu
-Studio loads — anything else placed under `filament/` or `process/` is invisible to the slicer.
+Each preset inherits a **system** preset and carries only the vendor numbers, so Bambu's own
+updates keep flowing in. There are deliberately no user-level base presets: Bambu Studio cannot
+upload a preset whose parent is another user preset, because the parent's cloud id never reaches
+its children (see AGENTS.md, "Bambu Cloud sync"). Run `tools/link-cloud-info.py` once per machine
+to generate the `.info` sidecars that Bambu Studio needs before it will sync anything.
 
 The repository root is the per-account preset folder, i.e.
 `~/.config/BambuStudio/user/<account-id>/`. Preset paths therefore never contain the

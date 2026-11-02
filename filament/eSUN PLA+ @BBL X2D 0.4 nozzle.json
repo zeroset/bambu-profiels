@@ -1,9 +1,72 @@
 {
     "type": "filament",
     "name": "eSUN PLA+ @BBL X2D 0.4 nozzle",
-    "inherits": "eSUN PLA+ @BBL X2D @base",
+    "inherits": "Generic PLA @BBL X2D 0.4 nozzle",
     "from": "User",
     "instantiation": "true",
+    "version": "02.08.02.61",
+    "description": "eSUN PLA+ on Bambu Lab X2D 0.4 mm. Vendor numbers from eSUN's official Bambu Lab profiles (2026-11-02): 220 C, flow 0.98, 22.99/kg, 1.25 g/cm3, textured plate 60 C. Volumetric speed 20/38/20/20/29/20, scaled after Bambu's own X2D variant ratios.",
+    "filament_vendor": [
+        "eSUN"
+    ],
+    "filament_type": [
+        "PLA"
+    ],
+    "filament_cost": [
+        "22.99"
+    ],
+    "filament_density": [
+        "1.25"
+    ],
+    "filament_flow_ratio": [
+        "0.98",
+        "0.98",
+        "0.98",
+        "0.98",
+        "0.98",
+        "0.98"
+    ],
+    "filament_max_volumetric_speed": [
+        "20",
+        "38",
+        "20",
+        "20",
+        "29",
+        "20"
+    ],
+    "nozzle_temperature": [
+        "220",
+        "220",
+        "220",
+        "220",
+        "220",
+        "220"
+    ],
+    "nozzle_temperature_initial_layer": [
+        "220",
+        "220",
+        "220",
+        "220",
+        "220",
+        "220"
+    ],
+    "slow_down_layer_time": [
+        "6"
+    ],
+    "slow_down_min_speed": [
+        "20",
+        "20",
+        "20",
+        "20",
+        "20",
+        "20"
+    ],
+    "textured_plate_temp": [
+        "60"
+    ],
+    "textured_plate_temp_initial_layer": [
+        "60"
+    ],
     "compatible_printers": [
         "Bambu Lab X2D 0.4 nozzle"
     ]

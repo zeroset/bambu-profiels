@@ -19,20 +19,21 @@ preset is shipped at all, which is why the ASA+ numbers come from the H2D pack i
 
 ## Resulting presets
 
-| Preset | Inherits | Material numbers |
+| Preset | Inherits | Numbers |
 |---|---|---|
-| `filament/eSUN PLA+ @BBL X2D 0.4 nozzle` | `filament/base/eSUN PLA+ @BBL X2D @base` | 220 °C, MVS 20/38/20/20/29/20, flow 0.98, 22.99 €/kg, 1.25 g/cm³, textured plate 60 °C |
-| `filament/eSUN ASA+ @BBL X2D 0.4 nozzle` | `filament/base/eSUN ASA+ @BBL X2D @base` | 260 °C, MVS 16, flow 0.96, 24.99 €/kg, 1.04 g/cm³, chamber 50 °C, fan max 40 % |
-| `process/eSUN PLA+ Process @BBL X2D` | `process/base/eSUN PLA+ Process @base` | walls 280/200, infill 280, top 250, first layer 50 |
-| `process/eSUN ASA+ Process @BBL X2D` | `process/base/eSUN ASA+ Process @base` | walls 200/150, infill 150–200 |
+| `filament/eSUN PLA+ @BBL X2D 0.4 nozzle` | `Generic PLA @BBL X2D 0.4 nozzle` | 220 °C, MVS 20/38/20/20/29/20, flow 0.98, 22.99 €/kg, 1.25 g/cm³, textured plate 60 °C |
+| `filament/eSUN ASA+ @BBL X2D 0.4 nozzle` | `Bambu ASA @BBL X2D 0.4 nozzle` | 260 °C, MVS 16, flow 0.96, 24.99 €/kg, 1.04 g/cm³, chamber 50 °C, fan max 40 % |
+| `process/eSUN PLA+ Process @BBL X2D` | `0.20mm Standard @BBL X2D` | walls 280/200, infill 280, top 250, first layer 50 |
+| `process/eSUN ASA+ Process @BBL X2D` | `0.20mm Standard @BBL X2D` | walls 200/150, infill 150–200 |
 
-The `@base` files are hidden (`instantiation: false`) and loaded from `base/`, so eSUN's numbers
-stay untouched while the visible presets above them stay thin. Edit the visible ones in the UI;
-Bambu Studio writes the diff back there.
+Each preset inherits a **system** preset and carries the eSUN numbers inline. An earlier layout
+put those numbers in hidden `@base` user presets and inherited from them, which works locally but
+never uploads to Bambu Cloud: a user-level parent's `setting_id` is only propagated to its
+children when the parent is a root preset (no `inherits` at all), so the children never receive a
+`base_id` and `get_user_presets()` skips them. See AGENTS.md, "Bambu Cloud sync".
 
-The base names carry the `@BBL X2D` marker on purpose: Bambu Studio already ships a system
-preset literally named `eSUN PLA+ @base`, and a user preset with the same name is discarded at
-load time ("Preset already present, not loading").
+All four carry `"version": "02.08.02.61"`; without a parseable `version` Bambu Studio skips the
+file entirely, which is why earlier AI-written presets never appeared in the UI or the cloud.
 
 ## Deliberate deviations from the downloaded files
 

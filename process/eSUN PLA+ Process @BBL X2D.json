@@ -1,9 +1,59 @@
 {
     "type": "process",
     "name": "eSUN PLA+ Process @BBL X2D",
-    "inherits": "eSUN PLA+ Process @base",
+    "inherits": "0.20mm Standard @BBL X2D",
     "from": "User",
     "instantiation": "true",
+    "version": "02.08.02.61",
+    "description": "eSUN PLA+ process for Bambu Lab X2D at 0.20 mm. Speeds from eSUN's official X2D PLA+ process (2026-11-02): inner wall 280, outer wall 200, infill 280, top surface 250, first layer infill 50. Do not combine with the 'small perimeter threshold' from eSUN's pack; it was a copy of the wall speeds and is a length in mm.",
+    "initial_layer_infill_speed": [
+        "50",
+        "nil",
+        "50",
+        "nil"
+    ],
+    "inner_wall_speed": [
+        "280",
+        "nil",
+        "280",
+        "nil"
+    ],
+    "internal_solid_infill_speed": [
+        "nil",
+        "nil",
+        "280",
+        "nil"
+    ],
+    "outer_wall_speed": [
+        "nil",
+        "nil",
+        "200",
+        "nil"
+    ],
+    "print_extruder_id": [
+        "1",
+        "1",
+        "2",
+        "2"
+    ],
+    "print_extruder_variant": [
+        "Direct Drive Standard",
+        "Direct Drive High Flow",
+        "Bowden Standard",
+        "Bowden High Flow"
+    ],
+    "sparse_infill_speed": [
+        "nil",
+        "nil",
+        "280",
+        "nil"
+    ],
+    "top_surface_speed": [
+        "nil",
+        "nil",
+        "250",
+        "nil"
+    ],
     "compatible_printers": [
         "Bambu Lab X2D 0.4 nozzle"
     ]

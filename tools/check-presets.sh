@@ -21,7 +21,7 @@ if [ ! -d "$SYSTEM" ]; then
 fi
 
 python3 - "$ROOT" "$SYSTEM" <<'PY'
-import json, os, sys
+import json, os, re, sys
 
 root, system = sys.argv[1], sys.argv[2]
 collections = ("filament", "process", "machine")
@@ -71,6 +71,15 @@ for coll in collections:
                 errors.append(f"{rel}: missing 'instantiation' (\"true\" or \"false\")")
             elif str(data["instantiation"]).lower() not in ("true", "false"):
                 errors.append(f"{rel}: instantiation must be \"true\" or \"false\"")
+
+            # Bambu Studio silently drops a user preset whose 'version' does not
+            # parse:  if (!Semver::parse(key_values["version"])) continue;
+            ver = data.get("version")
+            if ver is None:
+                errors.append(f"{rel}: missing 'version' — Bambu Studio will not load the preset")
+            elif not re.fullmatch(r"\d+(\.\d+){1,3}", str(ver)):
+                errors.append(f"{rel}: version {ver!r} does not parse "
+                              f"(expected 2.8.2 or 02.08.02.61)")
 
 # ---- inheritance -----------------------------------------------------------
 for name, (path, _coll, data) in repo.items():

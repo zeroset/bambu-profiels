@@ -40,11 +40,11 @@ names, "for my …", notes about a specific print job) before committing.
 The per-account Bambu Studio user preset folder:
 
 ```
-filament/        filament presets   (*.json); base/ holds hidden bases
-process/         process presets    (*.json); base/ holds hidden bases
-machine/         printer presets    (*.json); base/ holds hidden bases
+filament/        filament presets   (*.json)
+process/         process presets    (*.json)
+machine/         printer presets    (*.json)
 vendor/<name>/   provenance notes for third-party profiles (no preset data)
-tools/           validation helpers
+tools/           validation + cloud-sidecar helpers
 .gitignore       excludes *.info, downloaded packs and scratch files
 .githooks/       pre-commit privacy guard
 ```
@@ -61,9 +61,14 @@ Bambu Studio scans each preset folder **flat** — `boost::filesystem::directory
 - `filament/base/foo.json` → loaded first, as a "custom root", so presets above it can inherit
   from it. Same for `process/base/` and `machine/base/`.
 
-`instantiation: "false"` loads a preset but hides it from the drop-down; `"true"` shows it. That
-is what lets `base/` hold upstream numbers while the folder above it holds thin, editable
-presets.
+**This repo does not use `base/`.** Two presets are enough for the slicer, but a user-level
+parent never reaches the cloud: `set_sync_info_and_save()` only propagates a parent's new
+`setting_id` to children when the uploaded preset is a *root* (`get_preset_base(preset) ==
+preset`, i.e. no `inherits` at all). A `base/` file that inherits a system preset is not a root,
+so its children never get a `base_id` and are never uploaded. Every preset here therefore
+inherits a **system** preset directly and carries its own values.
+
+`instantiation: "false"` loads a preset but hides it from the drop-down; `"true"` shows it.
 
 The **filename is the preset name** (`Preset preset(m_type, name, false)`), not the JSON `"name"`
 field. Keep them identical or the drop-down and the repository will disagree; the app also
@@ -79,10 +84,9 @@ Run `tools/check-presets.sh` to catch that before committing.
   or Bambu Studio will load a duplicate or resurrect the old name on the next save.
 - `"from": "User"` for everything committed here. `"from": "system"` is reserved for Bambu.
 - Presets are **diffs**: keep only the keys that differ from the parent, and put the parent in
-  `"inherits"`. The normal case points at a **system** preset (e.g.
-  `"Generic PLA @BBL X2D 0.4 nozzle"`). User → user chaining is allowed **only** for the
-  `base/` pattern: a visible preset inherits a hidden `@base` preset in the same collection.
-  Commit both together — deleting or renaming a base makes the child vanish from the UI.
+  `"inherits"`. Always point at a **system** preset (e.g. `"Generic PLA @BBL X2D 0.4 nozzle"`).
+  Do not chain user preset → user preset: it does not survive cloud sync (see Folder semantics)
+  and the child disappears from the UI if the parent is renamed.
 - Never give a preset the same name as a system preset. The user copy is discarded at load
   ("Preset already present, not loading") and children silently inherit Bambu's preset
   instead. `tools/check-presets.sh` fails on this, which is why the vendor bases carry an
@@ -100,6 +104,27 @@ Run `tools/check-presets.sh` to catch that before committing.
   and `include: fdm_filament_template_direct_bowden_e3d` behaviour intact.
 - `"version"` records the Bambu Studio version that wrote the file. Leave it alone when hand
   editing; the app refreshes it on save.
+
+## Bambu Cloud sync
+
+Two things decide whether a preset ever reaches your Bambu account:
+
+- **`"version"`** — must be a parseable version string, e.g. `"02.08.02.61"`. `load_presets()`
+  runs `if (!Semver::parse(version)) continue;`, so a preset without it is **silently skipped**:
+  absent from the drop-down and therefore never synced. `tools/check-presets.sh` fails on a
+  missing or unparseable version.
+- **`<name>.info`** — the sidecar holding `base_id`, the parent preset's `setting_id`.
+  `get_user_presets()` skips every preset that has an `inherits` but an empty `base_id`, so a
+  hand-written preset without this file never uploads, no matter how often you restart.
+
+`tools/link-cloud-info.py` writes the missing sidecars (never touching an existing `setting_id`).
+They are gitignored because they contain the account id and cloud ids; a fresh clone must run the
+script once before Bambu Studio will sync.
+
+The `version` value is uploaded to the cloud as the preset's slicer version — keep it equal to
+the Bambu Studio build that wrote the file, and put human-readable provenance in `"description"`.
+Bambu's parser accepts `AA.BB.CC` and `AA.BB.CC.DD` (four-part: `patch = CC*100 + DD`) and only
+compares the major number against the running app, so any `2.x` works.
 
 ## Workflow
 

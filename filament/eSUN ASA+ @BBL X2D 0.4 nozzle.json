@@ -1,9 +1,61 @@
 {
     "type": "filament",
     "name": "eSUN ASA+ @BBL X2D 0.4 nozzle",
-    "inherits": "eSUN ASA+ @BBL X2D @base",
+    "inherits": "Bambu ASA @BBL X2D 0.4 nozzle",
     "from": "User",
     "instantiation": "true",
+    "version": "02.08.02.61",
+    "description": "eSUN ASA+ on Bambu Lab X2D 0.4 mm. Vendor numbers from eSUN's official H2D ASA+ profile (2026-11-02): 260 C, flow 0.96, MVS 16, 24.99/kg, 1.04 g/cm3, chamber 50 C, fan max 40%. Bed temperatures inherited from Bambu ASA for X2D.",
+    "filament_vendor": [
+        "eSUN"
+    ],
+    "filament_type": [
+        "ASA"
+    ],
+    "filament_cost": [
+        "24.99"
+    ],
+    "filament_density": [
+        "1.04"
+    ],
+    "filament_flow_ratio": [
+        "0.96",
+        "0.96",
+        "0.96",
+        "0.96",
+        "0.96",
+        "0.96"
+    ],
+    "filament_max_volumetric_speed": [
+        "16",
+        "16",
+        "16",
+        "16",
+        "16",
+        "16"
+    ],
+    "nozzle_temperature": [
+        "260",
+        "260",
+        "260",
+        "260",
+        "260",
+        "260"
+    ],
+    "nozzle_temperature_initial_layer": [
+        "260",
+        "260",
+        "260",
+        "260",
+        "260",
+        "260"
+    ],
+    "chamber_temperatures": [
+        "50"
+    ],
+    "fan_max_speed": [
+        "40"
+    ],
     "compatible_printers": [
         "Bambu Lab X2D 0.4 nozzle"
     ]
