@@ -126,6 +126,23 @@ the Bambu Studio build that wrote the file, and put human-readable provenance in
 Bambu's parser accepts `AA.BB.CC` and `AA.BB.CC.DD` (four-part: `patch = CC*100 + DD`) and only
 compares the major number against the running app, so any `2.x` works.
 
+### Editing a preset that is already in the cloud
+
+The cloud is authoritative. On startup Bambu Studio compares the cloud's `update_time` with the
+local `updated_time` and, when the cloud is greater, **rewrites the local JSON with the cloud
+copy** (`Preset.cpp`, `load_user_preset`: *"update the one from cloud which is newer"*). Bambu's
+server timestamps can run hours ahead of the local clock, so a hand edit plus
+`updated_time = now` still loses the race.
+
+`tools/mark-for-upload.py` is the fix: it sets `sync_info = update` and moves `updated_time`
+past the last cloud value, so the upload path wins (`cloud_update_time <= updated_time`) and the
+diff is PUT on the next start.
+
+A successful cloud round-trip also rewrites the file in **round-trip form**: `type`,
+`instantiation` and `description` disappear, `version` becomes `2.8.2.61`, and every value equal
+to the parent is dropped because it is inherited. `tools/check-presets.sh` fails on that — which
+is the alarm. Recovery is `git checkout -- <file>` followed by `tools/mark-for-upload.py`.
+
 ## Workflow
 
 1. Quit Bambu Studio (`pgrep -f bin/bambu-studio` must be empty). It rewrites presets and

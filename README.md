@@ -13,7 +13,7 @@ filament/        filament presets
 process/         process presets
 machine/         printer presets
 vendor/esun/     provenance of the eSUN numbers
-tools/           check-presets.sh, link-cloud-info.py
+tools/           check-presets.sh, link-cloud-info.py, mark-for-upload.py
 AGENTS.md        contribution/privacy rules — read before committing
 ```
 
