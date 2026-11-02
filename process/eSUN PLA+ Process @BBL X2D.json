@@ -5,7 +5,7 @@
     "from": "User",
     "instantiation": "true",
     "version": "02.08.02.61",
-    "description": "eSUN PLA+ process for Bambu Lab X2D at 0.20 mm. Speeds from eSUN's official X2D PLA+ process (2026-11-02): inner wall 280, outer wall 200, infill 280, top surface 250, first layer infill 50. Do not combine with the 'small perimeter threshold' from eSUN's pack; it was a copy of the wall speeds and is a length in mm.",
+    "description": "eSUN PLA+ process for Bambu Lab X2D at 0.20 mm, balanced speed/quality. 3 walls, gyroid 12%, 4 top layers, back seam, merged infill, reduced wall crossings. Speeds from eSUN's official X2D PLA+ process (2026-11-02), with the Direct Drive Standard values brought in line with the preset's 21 mm3/s ceiling.",
     "initial_layer_infill_speed": [
         "50",
         "nil",
@@ -13,13 +13,13 @@
         "nil"
     ],
     "inner_wall_speed": [
-        "280",
+        "240",
         "nil",
         "280",
         "nil"
     ],
     "internal_solid_infill_speed": [
-        "nil",
+        "280",
         "nil",
         "280",
         "nil"
@@ -56,5 +56,12 @@
     ],
     "compatible_printers": [
         "Bambu Lab X2D 0.4 nozzle"
-    ]
+    ],
+    "wall_loops": "3",
+    "top_shell_layers": "4",
+    "sparse_infill_density": "12%",
+    "sparse_infill_pattern": "gyroid",
+    "seam_position": "back",
+    "reduce_crossing_wall": "1",
+    "infill_combination": "1"
 }
