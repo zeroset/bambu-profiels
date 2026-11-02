@@ -94,6 +94,11 @@ Run `tools/check-presets.sh` to catch that before committing.
 - `"instantiation": "true"` makes the preset appear in the UI drop-down; `false` marks a base.
 - `"compatible_printers": ["Bambu Lab X2D 0.4 nozzle"]` must list the exact system machine
   preset names, or the preset will not be selectable.
+- Personal presets carry a **`zz ` prefix** so they sort last in Bambu Studio's drop-downs, the
+  cloud list and Bambuddy's slice dialog. The name is simultaneously the filename and the cloud
+  key, so a rename touches all three — and it must be done *through the app* ("Save as" + delete
+  the old one; there is no preset rename), never by moving files, or the startup sync will
+  resurrect the old name. Keep the descriptive part and the `@BBL X2D 0.4 nozzle` suffix intact.
 - X2D/H2D filament presets use 6-element arrays ordered by `filament_extruder_variant`
   (`Direct Drive Standard`, `Direct Drive High Flow`, `Direct Drive E3D High Flow`,
   `Bowden Standard`, `Bowden High Flow`, `Bowden E3D High Flow`). Do not copy 2-element arrays

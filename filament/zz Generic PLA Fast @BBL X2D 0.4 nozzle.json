@@ -1,0 +1,42 @@
+{
+    "filament_extruder_variant": [
+        "Direct Drive Standard",
+        "Direct Drive High Flow",
+        "Direct Drive E3D High Flow",
+        "Bowden Standard",
+        "Bowden High Flow",
+        "Bowden E3D High Flow"
+    ],
+    "filament_max_volumetric_speed": [
+        "20",
+        "20",
+        "20",
+        "20",
+        "20",
+        "20"
+    ],
+    "filament_settings_id": [
+        "zz Generic PLA Fast @BBL X2D 0.4 nozzle"
+    ],
+    "from": "User",
+    "inherits": "Generic PLA @BBL X2D 0.4 nozzle",
+    "name": "zz Generic PLA Fast @BBL X2D 0.4 nozzle",
+    "slow_down_layer_time": [
+        "4"
+    ],
+    "slow_down_min_speed": [
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40"
+    ],
+    "version": "2.8.2.61",
+    "type": "filament",
+    "instantiation": "true",
+    "compatible_printers": [
+        "Bambu Lab X2D 0.4 nozzle"
+    ],
+    "description": "Personal preset - the 'zz' prefix sorts it last in Bambu Studio's and Bambuddy's preset lists. Generic PLA with flow pushed for speed on the X2D: volumetric speed 20 on every variant (above Bambu's 12 for Generic PLA) and layer cooling cut to 4 s / 40 mm/s."
+}

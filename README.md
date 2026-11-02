@@ -24,6 +24,14 @@ AGENTS.md        contribution/privacy rules — read before committing
 | eSUN PLA+ | `eSUN PLA+ @BBL X2D 0.4 nozzle` | `eSUN PLA+ Process @BBL X2D` |
 | eSUN ASA+ | `eSUN ASA+ @BBL X2D 0.4 nozzle` | `eSUN ASA+ Process @BBL X2D` |
 
+Personal presets carry a `zz ` prefix so they sort to the end of every preset list — Bambu
+Studio's drop-downs, the cloud, and Bambuddy's slice dialog:
+
+| Preset | What it is |
+|---|---|
+| `zz Generic PLA Fast @BBL X2D 0.4 nozzle` | Generic PLA with volumetric speed 20 on every variant and 4 s layer cooling, for fast PLA prints |
+| `zz 0.2mm Speed Custom` | 0.20 mm process, walls/infill 450, outer wall 200, top surface 230 |
+
 Each preset inherits a **system** preset and carries only the vendor numbers, so Bambu's own
 updates keep flowing in. There are deliberately no user-level base presets: Bambu Studio cannot
 upload a preset whose parent is another user preset, because the parent's cloud id never reaches
