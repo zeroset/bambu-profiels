@@ -5,7 +5,7 @@
     "from": "User",
     "instantiation": "true",
     "version": "02.08.02.61",
-    "description": "eSUN PLA+ on Bambu Lab X2D 0.4 mm. Vendor numbers from eSUN's official Bambu Lab profiles (2026-11-02): flow 0.98, 22.99/kg, 1.25 g/cm3, textured plate 60 C. Nozzle 225 C for flow headroom at speed. Volumetric speed 21/40/21/21/31/21 - Direct Drive Standard matches Bambu PLA Basic, high-flow slots follow Bambu's own X2D ratios. Layer cooling 5 s / 25 mm/s.",
+    "description": "eSUN PLA+ on Bambu Lab X2D 0.4 mm. Vendor numbers from eSUN's official Bambu Lab profiles (2026-11-02): flow 0.98, 22.99/kg, 1.25 g/cm3, textured plate 60 C. Nozzle 225 C. Volumetric speed 24/45/24/24/35/24 - Direct Drive Standard is 24, raised above Bambu's 21 for PLA Basic after a Sport-mode print (124%) drove the capped roles to ~26 mm3/s and stayed clean; the high-flow slots keep Bambu's ratios. Layer cooling 5 s / 25 mm/s.",
     "filament_vendor": [
         "eSUN"
     ],
@@ -27,12 +27,12 @@
         "0.98"
     ],
     "filament_max_volumetric_speed": [
-        "21",
-        "40",
-        "21",
-        "21",
-        "31",
-        "21"
+        "24",
+        "45",
+        "24",
+        "24",
+        "35",
+        "24"
     ],
     "nozzle_temperature": [
         "225",

@@ -21,7 +21,7 @@ preset is shipped at all, which is why the ASA+ numbers come from the H2D pack i
 
 | Preset | Inherits | Numbers |
 |---|---|---|
-| `filament/eSUN PLA+ @BBL X2D 0.4 nozzle` | `Generic PLA @BBL X2D 0.4 nozzle` | 225 °C, MVS 21/40/21/21/31/21, flow 0.98, 22.99 €/kg, 1.25 g/cm³, textured plate 60 °C |
+| `filament/eSUN PLA+ @BBL X2D 0.4 nozzle` | `Generic PLA @BBL X2D 0.4 nozzle` | 225 °C, MVS 24/45/24/24/35/24, flow 0.98, 22.99 €/kg, 1.25 g/cm³, textured plate 60 °C |
 | `filament/eSUN ASA+ @BBL X2D 0.4 nozzle` | `Bambu ASA @BBL X2D 0.4 nozzle` | 260 °C, MVS 16, flow 0.96, 24.99 €/kg, 1.04 g/cm³, chamber 50 °C, fan max 40 % |
 | `process/eSUN PLA+ Process @BBL X2D` | `0.20mm Standard @BBL X2D` | 3 walls, gyroid 12 %, 4 top layers, back seam, walls 240/200, infill 280, first layer 50 |
 | `process/eSUN ASA+ Process @BBL X2D` | `0.20mm Standard @BBL X2D` | walls 200/150, infill 150–200 |
@@ -52,26 +52,39 @@ file entirely, which is why earlier AI-written presets never appeared in the UI 
 ## Volumetric speed
 
 eSUN publishes a flat 16 mm³/s; third-party X2D profiles derived from their packs claim 21.
-This repo uses **21 mm³/s for Direct Drive Standard** — Bambu's own value for PLA Basic on this
-extruder — and scales the other extruder variants after Bambu's X2D ratios (`21 / 40 / 21 / 21 / 30 / 21`):
+This repo now uses **24 mm³/s for Direct Drive Standard** and scales the other extruder variants
+after Bambu's X2D ratios:
 
 | Variant | MVS | Basis |
 |---|---:|---|
-| Direct Drive Standard | 21 | Bambu PLA Basic parity |
-| Direct Drive High Flow | 40 | Bambu's value |
-| Direct Drive E3D High Flow | 21 | Bambu leaves E3D at the standard value |
-| Bowden Standard | 21 | Bambu keeps Bowden at parity with Direct (21/21) |
-| Bowden High Flow | 31 | Bambu 30/21 × 21 |
-| Bowden E3D High Flow | 21 | Bambu leaves E3D at the standard value |
+| Direct Drive Standard | 24 | raised from Bambu's 21 — see *Verified flow* below |
+| Direct Drive High Flow | 45 | Bambu's 40 scaled by 24/21 |
+| Direct Drive E3D High Flow | 24 | Bambu leaves E3D at the standard value |
+| Bowden Standard | 24 | Bambu keeps Bowden at parity with Direct |
+| Bowden High Flow | 35 | Bambu's 30 scaled by 24/21 |
+| Bowden E3D High Flow | 24 | Bambu leaves E3D at the standard value |
 
 The X2D is a two-extruder machine (`extruder_type: Direct Drive, Bowden`), so slots 4–6 are the
 second, Bowden-fed extruder, not an alternative nozzle on extruder 1.
 
-At 0.2 mm layers those limits work out to ~233 mm/s on 0.45 mm walls/infill and ~250 mm/s on
-0.42 mm lines before the slicer throttles. Requested speeds above that are silently capped, which
-is why the process preset asks for 240 rather than 280 on Direct Drive: the number now matches
-what the printer can deliver. The cost/density values remain Bambu's shipped eSUN numbers
-(22.99 / 1.25) rather than the third-party 24.99 / 1.26.
+At 0.2 mm layers those limits work out to ~272 mm/s on 0.45 mm walls/infill and ~292 mm/s on
+0.42 mm lines before the slicer throttles. The process preset's requested speeds (inner wall 240,
+sparse infill 270, internal solid 280) all sit under that now, so none of them are silently
+capped any more — the same process ran 233/238/255 mm/s at the previous 21 mm³/s ceiling. The
+cost/density values remain Bambu's shipped eSUN numbers (22.99 / 1.25) rather than the
+third-party 24.99 / 1.26.
+
+### Verified flow (2026-11-02)
+
+A print sliced with the 21 mm³/s profile and then run with the printer's **Sport** setting
+(124 % feedrate override) came out clean. Sport multiplies feedrate *after* slicing, so it
+bypasses the slicer's volumetric cap: the binding roles (0.45 mm walls and infill, capped at
+238 mm/s) ran at ~295 mm/s ≈ **26 mm³/s**, 24 % above the profile's limit.
+
+That is evidence rather than a measurement — Sport is a blunt override that ignores layer-time
+and cooling rules and also raises accelerations, so one clean part is a lower bar than the same
+speed baked into the profile. The cap was therefore raised to **24**, not 26. The next step
+(26 mm³/s at 228–230 °C) stays pending a proper max-volumetric-speed test.
 
 ## Speed/quality tuning (PLA+)
 
