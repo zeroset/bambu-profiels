@@ -5,7 +5,7 @@
     "from": "User",
     "instantiation": "true",
     "version": "02.08.02.61",
-    "description": "eSUN ASA+ process for Bambu Lab X2D at 0.20 mm. Speeds from eSUN's official X2D ASA+ process (2026-11-02): inner wall 200/150, outer wall 150/120, infill 200/150, top surface 150, first layer infill 50.",
+    "description": "eSUN ASA+ process for Bambu Lab X2D at 0.20 mm. Speeds from eSUN's official X2D ASA+ process (2026-11-02): inner wall 200/150, outer wall 150/120, infill 200/150, top surface 150, first layer 50 - all now under the 18 mm3/s ceiling, so none are capped. 3 walls and gyroid at 15% for a material that delaminates; back seam, merged infill and reduced wall crossings for surface quality. Density stays 15% and top shells stay 5: ASA warps from thermal contraction, so more walls help while more infill adds shrink force. No ironing.",
     "initial_layer_infill_speed": [
         "50",
         "nil",
@@ -56,5 +56,10 @@
     ],
     "compatible_printers": [
         "Bambu Lab X2D 0.4 nozzle"
-    ]
+    ],
+    "wall_loops": "3",
+    "sparse_infill_pattern": "gyroid",
+    "seam_position": "back",
+    "reduce_crossing_wall": "1",
+    "infill_combination": "1"
 }
