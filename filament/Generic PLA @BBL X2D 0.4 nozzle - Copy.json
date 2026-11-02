@@ -1,0 +1,25 @@
+{
+    "filament_extruder_variant": [
+        "Direct Drive Standard",
+        "Direct Drive High Flow",
+        "Direct Drive E3D High Flow",
+        "Bowden Standard",
+        "Bowden High Flow",
+        "Bowden E3D High Flow"
+    ],
+    "filament_max_volumetric_speed": [
+        "18",
+        "nil",
+        "nil",
+        "nil",
+        "nil",
+        "nil"
+    ],
+    "filament_settings_id": [
+        "Generic PLA @BBL X2D 0.4 nozzle - Copy"
+    ],
+    "from": "User",
+    "inherits": "Generic PLA @BBL X2D 0.4 nozzle",
+    "name": "Generic PLA @BBL X2D 0.4 nozzle - Copy",
+    "version": "2.8.0.6"
+}

@@ -1,0 +1,15 @@
+# Bambu cloud-sync sidecars.
+# Contain the cloud account id (user_id) and the cloud preset id (setting_id/PFUS...).
+# They are machine- and account-specific and must never be published.
+*.info
+
+# Guest profile folder, if this repo is ever placed at the `user/` level.
+default/
+
+# Bambu Studio scratch / editor leftovers
+*.bak
+*.tmp
+*.orig
+*~
+.DS_Store
+Thumbs.db

@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# Public-repo guard. Rejects staged content that looks like credentials or personal data.
+# Policy lives in AGENTS.md; this only covers the mechanical, high-confidence cases.
+# Bypass with `git commit --no-verify` ONLY if you are certain it is a false positive.
+set -uo pipefail
+
+fail=0
+note() { printf 'BLOCKED: %s\n' "$1" >&2; fail=1; }
+
+mapfile -t paths < <(git diff --cached --name-only --diff-filter=ACMR)
+[ "${#paths[@]}" -eq 0 ] && exit 0
+
+# --- 1. path rules (all staged files) -------------------------------------
+for p in "${paths[@]}"; do
+  case "$p" in
+    *.info)   note "$p — Bambu cloud sidecar (user_id / setting_id)" ;;
+    default/*) note "$p — guest preset folder, not for this repo" ;;
+  esac
+  if printf '%s' "$p" | grep -Eq '(^|/)[0-9]{6,}(/|$)'; then
+    note "$p — path looks like a Bambu account id"
+  fi
+  if printf '%s' "$p" | grep -Eq '\.(localstorage|sqlite|log|enc|conf|pem|key)$'; then
+    note "$p — config/secret/log file type"
+  fi
+done
+
+# --- 2. content rules (preset JSON only) ----------------------------------
+mapfile -t jsonfiles < <(printf '%s\n' "${paths[@]}" | grep -E '\.json$' || true)
+if [ "${#jsonfiles[@]}" -gt 0 ]; then
+  added=$(git diff --cached -U0 -- "${jsonfiles[@]}" \
+            | grep -E '^\+' | grep -vE '^\+\+\+' || true)
+
+  check() { # pattern, description
+    if printf '%s\n' "$added" | grep -Eqi -- "$1"; then
+      note "staged JSON contains $2"
+    fi
+  }
+
+  check '"(user_id|setting_id|base_id|sync_info|user_access_code|access_code)"[[:space:]]*[:=]' 'cloud account metadata'
+  check '20P[0-9A-Z]{10,}'                        'printer serial number'
+  check '/home/[A-Za-z0-9._@-]+'                  'absolute home path'
+  check '"(password|api_key|api-key|secret|token|cookie|bearer)"[[:space:]]*[:=]' 'secret-looking value'
+  check '[[:space:]]*-----BEGIN'                  'private key block'
+  check '[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' 'email address'
+fi
+
+if [ "$fail" -ne 0 ]; then
+  printf '\nCommit rejected. See AGENTS.md ("Hard rule: no credentials, no personal data").\n' >&2
+  exit 1
+fi
+
+exit 0
