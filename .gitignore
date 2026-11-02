@@ -6,6 +6,10 @@
 # Guest profile folder, if this repo is ever placed at the `user/` level.
 default/
 
+# Downloaded third-party preset packs. Not redistributed; see vendor/esun/README.md
+*.zip
+*.bbsflmt
+
 # Bambu Studio scratch / editor leftovers
 *.bak
 *.tmp

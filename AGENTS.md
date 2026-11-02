@@ -40,26 +40,53 @@ names, "for my …", notes about a specific print job) before committing.
 The per-account Bambu Studio user preset folder:
 
 ```
-filament/    filament presets   (*.json)
-process/     process presets    (*.json)
-machine/     printer presets    (*.json)
-.gitignore   excludes *.info and scratch files
-.githooks/   pre-commit privacy guard
+filament/        filament presets   (*.json); base/ holds hidden bases
+process/         process presets    (*.json); base/ holds hidden bases
+machine/         printer presets    (*.json); base/ holds hidden bases
+vendor/<name>/   provenance notes for third-party profiles (no preset data)
+tools/           validation helpers
+.gitignore       excludes *.info, downloaded packs and scratch files
+.githooks/       pre-commit privacy guard
 ```
 
 System presets (`~/.config/BambuStudio/system/BBL/…`) are **not** part of this repo. They are
 downloaded and overwritten by Bambu Studio; never copy them in.
+
+### Folder semantics (verified against `Preset.cpp`)
+
+Bambu Studio scans each preset folder **flat** — `boost::filesystem::directory_iterator` plus
+`is_json_file()`, no recursion — with exactly one exception:
+
+- `filament/esun/foo.json` → **never loaded**. Only `base/` is recursed into.
+- `filament/base/foo.json` → loaded first, as a "custom root", so presets above it can inherit
+  from it. Same for `process/base/` and `machine/base/`.
+
+`instantiation: "false"` loads a preset but hides it from the drop-down; `"true"` shows it. That
+is what lets `base/` hold upstream numbers while the folder above it holds thin, editable
+presets.
+
+The **filename is the preset name** (`Preset preset(m_type, name, false)`), not the JSON `"name"`
+field. Keep them identical or the drop-down and the repository will disagree; the app also
+renames the file when a preset is saved under a new name.
+
+A preset whose `inherits` cannot be resolved is **skipped** (`can not find parent …` in the log),
+not loaded with defaults — so an upstream rename makes the preset vanish from the drop-down.
+Run `tools/check-presets.sh` to catch that before committing.
 
 ## Preset conventions
 
 - One JSON file per preset. The filename must equal the preset's `"name"` field, minus `.json`,
   or Bambu Studio will load a duplicate or resurrect the old name on the next save.
 - `"from": "User"` for everything committed here. `"from": "system"` is reserved for Bambu.
-- Presets are **diffs**: keep only the keys that differ from the parent. Put the parent in
-  `"inherits"` and always point it at a **system** preset (e.g.
-  `"Generic PLA @BBL X2D 0.4 nozzle"`). Do not chain user preset → user preset: renaming or
-  deleting the parent, or a different cloud-sync order, breaks the child with
-  "base preset not found".
+- Presets are **diffs**: keep only the keys that differ from the parent, and put the parent in
+  `"inherits"`. The normal case points at a **system** preset (e.g.
+  `"Generic PLA @BBL X2D 0.4 nozzle"`). User → user chaining is allowed **only** for the
+  `base/` pattern: a visible preset inherits a hidden `@base` preset in the same collection.
+  Commit both together — deleting or renaming a base makes the child vanish from the UI.
+- Never give a preset the same name as a system preset. The user copy is discarded at load
+  ("Preset already present, not loading") and children silently inherit Bambu's preset
+  instead. `tools/check-presets.sh` fails on this, which is why the vendor bases carry an
+  `@BBL X2D` marker.
 - `"instantiation": "true"` makes the preset appear in the UI drop-down; `false` marks a base.
 - `"compatible_printers": ["Bambu Lab X2D 0.4 nozzle"]` must list the exact system machine
   preset names, or the preset will not be selectable.
@@ -101,6 +128,7 @@ bypasses it and is never an acceptable workaround for a real finding.
 ## Before every commit
 
 ```bash
+tools/check-presets.sh        # names, types, instantiation, inheritance
 git status --short            # nothing unexpected staged
 git diff --cached             # read every added line
 git ls-files '*.info'         # must print nothing

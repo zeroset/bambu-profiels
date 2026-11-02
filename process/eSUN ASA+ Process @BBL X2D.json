@@ -1,0 +1,10 @@
+{
+    "type": "process",
+    "name": "eSUN ASA+ Process @BBL X2D",
+    "inherits": "eSUN ASA+ Process @base",
+    "from": "User",
+    "instantiation": "true",
+    "compatible_printers": [
+        "Bambu Lab X2D 0.4 nozzle"
+    ]
+}

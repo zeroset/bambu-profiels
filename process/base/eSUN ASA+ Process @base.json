@@ -1,0 +1,58 @@
+{
+    "type": "process",
+    "name": "eSUN ASA+ Process @base",
+    "inherits": "0.20mm Standard @BBL X2D",
+    "from": "User",
+    "instantiation": "false",
+    "initial_layer_infill_speed": [
+        "50",
+        "nil",
+        "50",
+        "nil"
+    ],
+    "inner_wall_speed": [
+        "200",
+        "nil",
+        "150",
+        "nil"
+    ],
+    "internal_solid_infill_speed": [
+        "200",
+        "nil",
+        "150",
+        "nil"
+    ],
+    "outer_wall_speed": [
+        "150",
+        "nil",
+        "120",
+        "nil"
+    ],
+    "print_extruder_id": [
+        "1",
+        "1",
+        "2",
+        "2"
+    ],
+    "print_extruder_variant": [
+        "Direct Drive Standard",
+        "Direct Drive High Flow",
+        "Bowden Standard",
+        "Bowden High Flow"
+    ],
+    "sparse_infill_speed": [
+        "200",
+        "nil",
+        "150",
+        "nil"
+    ],
+    "top_surface_speed": [
+        "nil",
+        "nil",
+        "150",
+        "nil"
+    ],
+    "compatible_printers": [
+        "Bambu Lab X2D 0.4 nozzle"
+    ]
+}

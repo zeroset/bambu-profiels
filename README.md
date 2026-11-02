@@ -9,11 +9,24 @@ as diffs.
 ## Layout
 
 ```
-filament/    filament presets
-process/     process presets
-machine/     printer presets
-AGENTS.md    contribution/privacy rules — read before committing
+filament/        filament presets; base/ holds hidden bases
+process/         process presets;  base/ holds hidden bases
+machine/         printer presets;  base/ holds hidden bases
+vendor/esun/     provenance of the eSUN numbers
+tools/           check-presets.sh
+AGENTS.md        contribution/privacy rules — read before committing
 ```
+
+### Included presets
+
+| Material | Filament preset | Process preset |
+|---|---|---|
+| eSUN PLA+ | `eSUN PLA+ @BBL X2D 0.4 nozzle` | `eSUN PLA+ Process @BBL X2D` |
+| eSUN ASA+ | `eSUN ASA+ @BBL X2D 0.4 nozzle` | `eSUN ASA+ Process @BBL X2D` |
+
+Each visible preset is a thin layer over a hidden `@base` file in `base/`, so vendor numbers
+stay untouched and your own tweaks remain a small diff. `base/` is the only subfolder Bambu
+Studio loads — anything else placed under `filament/` or `process/` is invisible to the slicer.
 
 The repository root is the per-account preset folder, i.e.
 `~/.config/BambuStudio/user/<account-id>/`. Preset paths therefore never contain the
