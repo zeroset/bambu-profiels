@@ -29,8 +29,8 @@ Studio's drop-downs, the cloud, and Bambuddy's slice dialog:
 
 | Preset | What it is |
 |---|---|
-| `zz Generic PLA Fast @BBL X2D 0.4 nozzle` | Generic PLA with volumetric speed 20 on every variant and 4 s layer cooling, for fast PLA prints |
-| `zz 0.2mm Speed Custom` | 0.20 mm process, walls/infill 450, outer wall 200, top surface 230 |
+| `zz Generic PLA Fast @BBL X2D 0.4 nozzle` | Generic PLA at 225 °C with volumetric speed 24 on every variant and 4 s layer cooling, for fast PLA prints |
+| `zz 0.2mm Speed Custom` | 0.20 mm process: walls/infill 270, outer wall 220, internal solid 280, top 230, first layer 80 walls / 150 infill |
 
 Each preset inherits a **system** preset and carries only the vendor numbers, so Bambu's own
 updates keep flowing in. There are deliberately no user-level base presets: Bambu Studio cannot

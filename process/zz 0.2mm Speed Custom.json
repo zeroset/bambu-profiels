@@ -1,46 +1,46 @@
 {
     "from": "User",
     "gap_infill_speed": [
-        "300",
-        "300",
-        "300",
-        "300",
-        "300",
-        "300"
+        "260",
+        "260",
+        "260",
+        "260",
+        "260",
+        "260"
     ],
     "inherits": "0.20mm Standard @BBL X2D",
     "inner_wall_speed": [
-        "450",
-        "450",
-        "450",
-        "450",
-        "450",
-        "450"
+        "270",
+        "270",
+        "270",
+        "270",
+        "270",
+        "270"
     ],
     "internal_solid_infill_speed": [
-        "400",
-        "400",
-        "400",
-        "400",
-        "400",
-        "400"
+        "280",
+        "280",
+        "280",
+        "280",
+        "280",
+        "280"
     ],
     "name": "zz 0.2mm Speed Custom",
     "outer_wall_acceleration": [
-        "4000",
-        "4000",
-        "4000",
-        "4000",
-        "4000",
-        "4000"
+        "5000",
+        "5000",
+        "5000",
+        "5000",
+        "5000",
+        "5000"
     ],
     "outer_wall_speed": [
-        "nil",
-        "200",
-        "200",
-        "200",
-        "200",
-        "200"
+        "220",
+        "220",
+        "220",
+        "220",
+        "220",
+        "220"
     ],
     "print_extruder_id": [
         "1",
@@ -60,12 +60,12 @@
     ],
     "print_settings_id": "zz 0.2mm Speed Custom",
     "sparse_infill_speed": [
-        "450",
-        "450",
-        "450",
-        "450",
-        "450",
-        "450"
+        "270",
+        "270",
+        "270",
+        "270",
+        "270",
+        "270"
     ],
     "support_speed": [
         "250",
@@ -105,5 +105,29 @@
     "compatible_printers": [
         "Bambu Lab X2D 0.4 nozzle"
     ],
-    "description": "Personal preset - the 'zz' prefix sorts it last in the preset lists. Fast 0.20 mm process for the X2D: inner wall and sparse infill 450, outer wall 200, top surface 230, gap fill 300, outer wall acceleration 4000."
+    "description": "Personal preset - the 'zz' prefix sorts it last in the preset lists. Fast 0.20 mm process for the X2D. Speeds now match what the 24 mm3/s filament ceiling can deliver instead of asking for numbers the slicer silently caps: inner wall and sparse infill 270, outer wall 220, internal solid 280, gap fill 260, top surface 230. First layer pushed to 80 walls / 150 infill with 1000 mm/s2 acceleration.",
+    "initial_layer_speed": [
+        "80",
+        "80",
+        "80",
+        "80",
+        "80",
+        "80"
+    ],
+    "initial_layer_infill_speed": [
+        "150",
+        "150",
+        "150",
+        "150",
+        "150",
+        "150"
+    ],
+    "initial_layer_acceleration": [
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000",
+        "1000"
+    ]
 }

@@ -8,12 +8,12 @@
         "Bowden E3D High Flow"
     ],
     "filament_max_volumetric_speed": [
-        "20",
-        "20",
-        "20",
-        "20",
-        "20",
-        "20"
+        "24",
+        "24",
+        "24",
+        "24",
+        "24",
+        "24"
     ],
     "filament_settings_id": [
         "zz Generic PLA Fast @BBL X2D 0.4 nozzle"
@@ -38,5 +38,21 @@
     "compatible_printers": [
         "Bambu Lab X2D 0.4 nozzle"
     ],
-    "description": "Personal preset - the 'zz' prefix sorts it last in Bambu Studio's and Bambuddy's preset lists. Generic PLA with flow pushed for speed on the X2D: volumetric speed 20 on every variant (above Bambu's 12 for Generic PLA) and layer cooling cut to 4 s / 40 mm/s."
+    "description": "Personal preset - the 'zz' prefix sorts it last in the preset lists. Generic PLA with flow pushed for speed on the X2D: volumetric speed 24 on every variant (Bambu ships 12 for Generic PLA, 21 for PLA Basic) and 225 C for the flow headroom that needs. Layer cooling cut to 4 s / 40 mm/s.",
+    "nozzle_temperature": [
+        "225",
+        "225",
+        "225",
+        "225",
+        "225",
+        "225"
+    ],
+    "nozzle_temperature_initial_layer": [
+        "225",
+        "225",
+        "225",
+        "225",
+        "225",
+        "225"
+    ]
 }
