@@ -8,12 +8,12 @@
         "Bowden E3D High Flow"
     ],
     "filament_max_volumetric_speed": [
-        "42",
-        "42",
-        "42",
-        "42",
-        "42",
-        "42"
+        "36",
+        "36",
+        "36",
+        "36",
+        "36",
+        "36"
     ],
     "filament_settings_id": [
         "zz Generic PLA Fast @BBL X2D 0.6 nozzle"
@@ -38,21 +38,21 @@
     "compatible_printers": [
         "Bambu Lab X2D 0.6 nozzle"
     ],
-    "description": "Personal preset - the 'zz' prefix sorts it last in the preset lists. Generic PLA with flow pushed for a 0.6 mm hotend: volumetric speed 42 on every variant (Bambu ships 12 for Generic PLA) and 240 C for the flow headroom that needs. Layer cooling cut to 4 s / 40 mm/s. Step 2 after a clean 30 mm3/s test print. If walls come out thin or gaps appear between infill lines, drop the volumetric speed back toward 30-36 and lower the process speeds to match.",
+    "description": "Personal preset - the 'zz' prefix sorts it last in the preset lists. Generic PLA with flow pushed for a 0.6 mm hotend: volumetric speed 36 on every variant (Bambu ships 12 for Generic PLA) and 235 C for the flow headroom that needs. Layer cooling cut to 4 s / 40 mm/s. Settled at 36 after 42 came out too aggressive. If walls still look thin or gaps appear between infill lines, drop toward 30-32 and lower the process speeds to match.",
     "nozzle_temperature": [
-        "240",
-        "240",
-        "240",
-        "240",
-        "240",
-        "240"
+        "235",
+        "235",
+        "235",
+        "235",
+        "235",
+        "235"
     ],
     "nozzle_temperature_initial_layer": [
-        "240",
-        "240",
-        "240",
-        "240",
-        "240",
-        "240"
+        "235",
+        "235",
+        "235",
+        "235",
+        "235",
+        "235"
     ]
 }
