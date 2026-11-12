@@ -1,12 +1,12 @@
 {
     "from": "User",
     "gap_infill_speed": [
-        "150",
-        "150",
-        "150",
-        "150",
-        "150",
-        "150"
+        "200",
+        "200",
+        "200",
+        "200",
+        "200",
+        "200"
     ],
     "inherits": "0.30mm Standard @BBL X2D 0.6 nozzle",
     "initial_layer_acceleration": [
@@ -18,12 +18,12 @@
         "1000"
     ],
     "initial_layer_infill_speed": [
-        "120",
-        "120",
-        "120",
-        "120",
-        "120",
-        "120"
+        "150",
+        "150",
+        "150",
+        "150",
+        "150",
+        "150"
     ],
     "initial_layer_speed": [
         "80",
@@ -34,29 +34,29 @@
         "80"
     ],
     "inner_wall_speed": [
-        "160",
-        "160",
-        "160",
-        "160",
-        "160",
-        "160"
+        "220",
+        "220",
+        "220",
+        "220",
+        "220",
+        "220"
     ],
     "internal_solid_infill_speed": [
-        "160",
-        "160",
-        "160",
-        "160",
-        "160",
-        "160"
+        "220",
+        "220",
+        "220",
+        "220",
+        "220",
+        "220"
     ],
     "name": "zz 0.30mm Speed Custom @BBL X2D 0.6 nozzle",
     "outer_wall_speed": [
-        "130",
-        "130",
-        "130",
-        "130",
-        "130",
-        "130"
+        "170",
+        "170",
+        "170",
+        "170",
+        "170",
+        "170"
     ],
     "print_extruder_id": [
         "1",
@@ -76,12 +76,12 @@
     ],
     "print_settings_id": "zz 0.30mm Speed Custom @BBL X2D 0.6 nozzle",
     "sparse_infill_speed": [
-        "160",
-        "160",
-        "160",
-        "160",
-        "160",
-        "160"
+        "220",
+        "220",
+        "220",
+        "220",
+        "220",
+        "220"
     ],
     "top_surface_acceleration": [
         "3000",
@@ -105,5 +105,5 @@
     "compatible_printers": [
         "Bambu Lab X2D 0.6 nozzle"
     ],
-    "description": "Personal preset - the 'zz' prefix sorts it last in the preset lists. Fast 0.30 mm process for the X2D 0.6 nozzle. A 0.62 x 0.30 mm line is 0.186 mm2, so the matching 'zz Generic PLA Fast @BBL X2D 0.6 nozzle' filament ceiling of 30 mm3/s caps the real speed at ~161 mm/s. Speeds are set just under that so the slicer uses them instead of silently capping: inner wall and solid/sparse infill 160, outer wall 130, gap fill 150, first layer 80 walls / 120 infill at 1000 mm/s2. If the hotend flows more, raise the filament volumetric speed and these speeds together."
+    "description": "Personal preset - the 'zz' prefix sorts it last in the preset lists. Fast 0.30 mm process for the X2D 0.6 nozzle. A 0.62 x 0.30 mm line is 0.186 mm2, so the matching 'zz Generic PLA Fast @BBL X2D 0.6 nozzle' filament ceiling of 42 mm3/s caps the real speed at ~226 mm/s. Speeds are set just under that so the slicer uses them instead of silently capping: inner wall and solid/sparse infill 220, outer wall 170, gap fill 200, first layer 80 walls / 150 infill at 1000 mm/s2. Top surface is kept at the stock 150 for finish. If the hotend flows more, raise the filament volumetric speed and these speeds together."
 }
