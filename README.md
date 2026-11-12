@@ -32,6 +32,7 @@ Studio's drop-downs, the cloud, and Bambuddy's slice dialog:
 | `zz Generic PLA Fast @BBL X2D 0.4 nozzle` | Generic PLA at 225 °C with volumetric speed 24 on every variant and 4 s layer cooling, for fast PLA prints |
 | `zz 0.2mm Speed Custom` | 0.20 mm process: walls/infill 270, outer wall 220, internal solid 280, top 230, first layer 80 walls / 150 infill |
 | `zz Generic PLA Fast @BBL X2D 0.6 nozzle` | Generic PLA at 235 °C with volumetric speed 36 on every variant and 4 s / 40 mm/s layer cooling, for fast PLA prints on the 0.6 mm hotend |
+| `zz 0.20mm Speed Custom @BBL X2D 0.6 nozzle` | 0.20 mm process for the 0.6 nozzle: walls/infill 280, outer wall 220, gap fill 270, first layer 80 walls / 150 infill, gyroid infill 15%, 3 top/bottom shells |
 | `zz 0.30mm Speed Custom @BBL X2D 0.6 nozzle` | 0.30 mm process for the 0.6 nozzle: walls/infill 190, outer wall 150, gap fill 180, first layer 80 walls / 150 infill, gyroid infill 15%, 3 top/bottom shells |
 
 Each preset inherits a **system** preset and carries only the vendor numbers, so Bambu's own
