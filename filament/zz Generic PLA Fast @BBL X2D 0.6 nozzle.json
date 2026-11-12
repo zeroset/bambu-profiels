@@ -1,0 +1,58 @@
+{
+    "filament_extruder_variant": [
+        "Direct Drive Standard",
+        "Direct Drive High Flow",
+        "Direct Drive E3D High Flow",
+        "Bowden Standard",
+        "Bowden High Flow",
+        "Bowden E3D High Flow"
+    ],
+    "filament_max_volumetric_speed": [
+        "30",
+        "30",
+        "30",
+        "30",
+        "30",
+        "30"
+    ],
+    "filament_settings_id": [
+        "zz Generic PLA Fast @BBL X2D 0.6 nozzle"
+    ],
+    "from": "User",
+    "inherits": "Generic PLA @BBL X2D",
+    "name": "zz Generic PLA Fast @BBL X2D 0.6 nozzle",
+    "slow_down_layer_time": [
+        "4"
+    ],
+    "slow_down_min_speed": [
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40"
+    ],
+    "version": "2.8.2.61",
+    "type": "filament",
+    "instantiation": "true",
+    "compatible_printers": [
+        "Bambu Lab X2D 0.6 nozzle"
+    ],
+    "description": "Personal preset - the 'zz' prefix sorts it last in the preset lists. Generic PLA with flow pushed for a 0.6 mm hotend: volumetric speed 30 on every variant (Bambu ships 12 for Generic PLA) and 230 C for the flow headroom that needs. Layer cooling cut to 4 s / 40 mm/s. First test print for the 0.6 hotend - lower the volumetric speed toward 24 if walls come out thin or gaps appear between infill lines.",
+    "nozzle_temperature": [
+        "230",
+        "230",
+        "230",
+        "230",
+        "230",
+        "230"
+    ],
+    "nozzle_temperature_initial_layer": [
+        "230",
+        "230",
+        "230",
+        "230",
+        "230",
+        "230"
+    ]
+}
