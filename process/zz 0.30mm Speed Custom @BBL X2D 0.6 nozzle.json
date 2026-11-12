@@ -75,6 +75,7 @@
         "Bowden E3D High Flow"
     ],
     "print_settings_id": "zz 0.30mm Speed Custom @BBL X2D 0.6 nozzle",
+    "sparse_infill_pattern": "gyroid",
     "sparse_infill_speed": [
         "220",
         "220",
@@ -105,5 +106,5 @@
     "compatible_printers": [
         "Bambu Lab X2D 0.6 nozzle"
     ],
-    "description": "Personal preset - the 'zz' prefix sorts it last in the preset lists. Fast 0.30 mm process for the X2D 0.6 nozzle. A 0.62 x 0.30 mm line is 0.186 mm2, so the matching 'zz Generic PLA Fast @BBL X2D 0.6 nozzle' filament ceiling of 42 mm3/s caps the real speed at ~226 mm/s. Speeds are set just under that so the slicer uses them instead of silently capping: inner wall and solid/sparse infill 220, outer wall 170, gap fill 200, first layer 80 walls / 150 infill at 1000 mm/s2. Top surface is kept at the stock 150 for finish. If the hotend flows more, raise the filament volumetric speed and these speeds together."
+    "description": "Personal preset - the 'zz' prefix sorts it last in the preset lists. Fast 0.30 mm process for the X2D 0.6 nozzle. A 0.62 x 0.30 mm line is 0.186 mm2, so the matching 'zz Generic PLA Fast @BBL X2D 0.6 nozzle' filament ceiling of 42 mm3/s caps the real speed at ~226 mm/s. Speeds are set just under that so the slicer uses them instead of silently capping: inner wall and solid/sparse infill 220, outer wall 170, gap fill 200, first layer 80 walls / 150 infill at 1000 mm/s2. Top surface is kept at the stock 150 for finish. Sparse infill is gyroid at the default 15%: no self-crossing lines, so the nozzle does not drag over freshly laid infill at 0.3 mm layers / 220 mm/s. If the hotend flows more, raise the filament volumetric speed and these speeds together."
 }
